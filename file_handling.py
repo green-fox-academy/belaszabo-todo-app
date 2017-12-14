@@ -6,7 +6,7 @@ class Argument(object):
         self.num_lines = sum(1 for line in open("todo_list.txt"))
 
     def arg_without_arguments(self):
-        print("\nCommand Line Todo application\n=============================\n\nCommand Line arguments:\n-l Lists all the tasks\n-a Adds a new task\n-r Removes a task\n-c Completes a task\n")
+        print("\nCommand Line Todo application\n=============================\n\nCommand Line arguments:\n\n-la Lists all the tasks\n-l Lists undone tasks\n-a Adds a new task\n-r Removes a task\n-c Completes a task\n")
 
     def list_all(self):
         if self.num_lines == 0:
@@ -53,7 +53,7 @@ class Argument(object):
             print("Unable to check: no index provided.")
         elif not item.isnumeric():
             print("Unable to check: index is not a number.")
-        elif int(item) > self.num_lines:
+        elif int(item) > self.num_lines or int(item) == 0:
             print("Unable to check: index is out of bound.")
         else:
             todo_list = open("todo_list.txt", "r+")
@@ -68,3 +68,17 @@ class Argument(object):
             todo_list.truncate()
             todo_list.close()
             print("Task checked successfully!")
+
+    def list_undone(self):
+        if self.num_lines == 0:
+            print("\nYou don't have any tasks for today! :)\n")
+        else:
+            print("\nAll your tasks are:\n")
+            todo_list = open("todo_list.txt", "r")
+            line_count = 1
+            for i in range(self.num_lines):
+                is_checked = todo_list.readline()
+                if is_checked[1] != "x":
+                    print(str(line_count) + " - " + is_checked)
+                    line_count += 1
+            todo_list.close()
