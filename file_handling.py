@@ -22,23 +22,33 @@ class Argument(object):
             todo_list.close()
 
     def add_task(self, item):
-        todo_list = open("todo_list.txt", "a")
-        todo_list.write("[ ] " + item + "\n")
-        todo_list.close()
-        print("Task added succesfully!")
+        if len(item) > 0:
+            todo_list = open("todo_list.txt", "a")
+            todo_list.write("[ ] " + item + "\n")
+            todo_list.close()
+            print("Task added succesfully!")
+        else:
+            print("Unable to add: no task provided.")
 
     def remove_task(self, item):
         num_lines = sum(1 for line in open("todo_list.txt"))
-        todo_list = open("todo_list.txt", "r+")
-        lines = todo_list.readlines()
-        item = int(item)
-        todo_list.seek(0)
-        for i in range(num_lines):
-            if i + 1 != item:
-                todo_list.write(lines[i])
-        todo_list.truncate()
-        todo_list.close()
-        print("Task removed successfully!")
+        if len(item) == 0:
+            print("Unable to remove: no index provided.")
+        elif type(int(item)) != int:
+            print("Unable to remove: index is not a number.")
+        elif int(item) > num_lines:
+            print("Unable to remove: index is out of bound.")
+        elif len(item) > 0:
+            todo_list = open("todo_list.txt", "r+")
+            lines = todo_list.readlines()
+            item = int(item)
+            todo_list.seek(0)
+            for i in range(num_lines):
+                if i + 1 != item:
+                    todo_list.write(lines[i])
+            todo_list.truncate()
+            todo_list.close()
+            print("Task removed successfully!")
     
     def complete_task(self, item):
         num_lines = sum(1 for line in open("todo_list.txt"))
