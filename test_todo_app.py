@@ -3,7 +3,7 @@ from controller import Controller
 
 class TestBelaWork(unittest.TestCase):
 
-    def 
+    pass
 
 
 

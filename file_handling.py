@@ -24,15 +24,19 @@ class Argument(object):
     def add_task(self, item):
         todo_list = open("todo_list.txt", "a")
         num_lines = sum(1 for line in open("todo_list.txt"))
-        if num_lines == 0:
-            todo_list.write(item)
-        else:
-            todo_list.write("\n" + item)
+        todo_list.write(item + "\n")
         todo_list.close()
         print("Task added succesfully!")
 
     def remove_task(self, item):
-        todo_list = open("todo_list.txt", "a")
+        todo_list = open("todo_list.txt", "r")
+        lines = todo_list.readlines()
+        todo_list.close()
+        todo_list = open("todo_list.txt", "w")
+        for line in lines:
+            if line != item:
+                todo_list.write(line + "\n")
+        todo_list.close()
         print("Task removed successfully!")
     
     def complete_task(self, item):
