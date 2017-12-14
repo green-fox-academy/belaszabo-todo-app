@@ -3,7 +3,6 @@ import sys
 class Argument(object):
 
     def __init__(self):
-        # argument = Argument()
         pass
 
     def arg_without_arguments(self):
@@ -20,22 +19,25 @@ class Argument(object):
             for _ in range(num_lines):
                 print(str(line_count) + " - " + str(todo_list.readline()))
                 line_count += 1
+            todo_list.close()
+        todo_list.close()
 
     def add_task(self, item):
         todo_list = open("todo_list.txt", "a")
-        num_lines = sum(1 for line in open("todo_list.txt"))
-        todo_list.write(item + "\n")
+        todo_list.write("[ ] " + item + "\n")
         todo_list.close()
         print("Task added succesfully!")
 
     def remove_task(self, item):
-        todo_list = open("todo_list.txt", "r")
+        num_lines = sum(1 for line in open("todo_list.txt"))
+        todo_list = open("todo_list.txt", "r+")
         lines = todo_list.readlines()
-        todo_list.close()
-        todo_list = open("todo_list.txt", "w")
-        for line in lines:
-            if line != item:
-                todo_list.write(line + "\n")
+        item = int(item)
+        todo_list.seek(0)
+        for i in range(num_lines):
+            if i + 1 != item:
+                todo_list.write(lines[i])
+        todo_list.truncate()
         todo_list.close()
         print("Task removed successfully!")
     
