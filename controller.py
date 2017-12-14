@@ -10,14 +10,17 @@ class Controller(object):
         task_string = " ".join(task)
         if len(arguments) == 1:
             argument.arg_without_arguments()
-        if "-l" in arguments:
+        elif "-l" in arguments:
             argument.list_all()
-        if "-a" in arguments:
+        elif "-a" in arguments:
             argument.add_task(task_string)
-        if "-r" in arguments:
+        elif "-r" in arguments:
             argument.remove_task(task_string)
-        if "-c" in arguments:
+        elif "-c" in arguments:
             argument.complete_task(task_string)
+        else:
+            print ("\nUnsupported argument, please see the information on how to use the program below:\n")
+            argument.arg_without_arguments()
 
 cont = Controller()
 cont.check_arguments()
