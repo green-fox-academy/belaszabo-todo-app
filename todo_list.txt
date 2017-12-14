@@ -1,3 +1,3 @@
-doing this
-doing that as well
-doing that as well as well
+[ ] doing this
+[x] doing this2
+[ ] doing this3

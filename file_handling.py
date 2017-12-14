@@ -20,7 +20,6 @@ class Argument(object):
                 print(str(line_count) + " - " + str(todo_list.readline()))
                 line_count += 1
             todo_list.close()
-        todo_list.close()
 
     def add_task(self, item):
         todo_list = open("todo_list.txt", "a")
@@ -42,4 +41,16 @@ class Argument(object):
         print("Task removed successfully!")
     
     def complete_task(self, item):
-        pass
+        num_lines = sum(1 for line in open("todo_list.txt"))
+        todo_list = open("todo_list.txt", "r+")
+        lines = todo_list.readlines()
+        item = int(item)
+        todo_list.seek(0)
+        for i in range(num_lines):
+            if i + 1 != item:
+                todo_list.write(lines[i])
+            else:
+                todo_list.write("[x]" + lines[i][3:])
+        todo_list.truncate()
+        todo_list.close()
+        print("Task checked successfully!")
