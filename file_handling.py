@@ -56,12 +56,11 @@ class Argument(object):
         elif int(item) > self.num_lines:
             print("Unable to check: index is out of bound.")
         else:
-            num_lines = sum(1 for line in open("todo_list.txt"))
             todo_list = open("todo_list.txt", "r+")
             lines = todo_list.readlines()
             item = int(item)
             todo_list.seek(0)
-            for i in range(num_lines):
+            for i in range(self.num_lines):
                 if i + 1 != item:
                     todo_list.write(lines[i])
                 else:

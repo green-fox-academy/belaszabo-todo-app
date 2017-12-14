@@ -1,4 +1,4 @@
 [x] helloka4
 [x] helloka5
 [ ] task6
-[ ] proba ekkll
+[x] proba ekkll
